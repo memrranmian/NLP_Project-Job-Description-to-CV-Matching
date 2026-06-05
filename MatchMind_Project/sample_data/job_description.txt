@@ -1,0 +1,5 @@
+We are hiring a machine learning engineer for an HR technology platform.
+The role requires Python, Flask, NLP, document parsing, TF-IDF, cosine similarity,
+data preprocessing, model evaluation, and experience building reliable web tools
+for non-technical business users. Familiarity with recruiting workflows, resume
+screening, and ethical AI is preferred.

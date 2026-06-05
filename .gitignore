@@ -1,9 +1,12 @@
-uploads/
-__pycache__/
-*.pyc
-.venv/
-venv/
-.env
-.idea/
-.vscode/
-*.pptx
+# Ignore everything in the root directory
+/*
+
+# Except the following
+!/MatchMind_Project/
+!/.gitignore
+
+# Inside MatchMind_Project, ignore virtual environment and caches
+/MatchMind_Project/.venv/
+/MatchMind_Project/.pytest_cache/
+/MatchMind_Project/**/__pycache__/
+/MatchMind_Project/**/*.pyc

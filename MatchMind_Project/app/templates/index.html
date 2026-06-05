@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MatchMind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <section class="workspace">
+      <header>
+        <p class="eyebrow">NLP Recruitment Matching</p>
+        <h1>MatchMind</h1>
+      </header>
+
+      <form method="post" enctype="multipart/form-data" class="panel">
+        <label for="job_description">Job Description</label>
+        <textarea id="job_description" name="job_description" rows="12" placeholder="Paste the role requirements, responsibilities, tools, and preferred skills here.">{{ job_description }}</textarea>
+
+        <label for="resumes">Candidate Resumes</label>
+        <input id="resumes" name="resumes" type="file" multiple accept=".txt,.pdf,.docx">
+
+        <button type="submit">Rank Candidates</button>
+      </form>
+    </section>
+
+    <section class="results">
+      <div class="results-header">
+        <h2>Ranked Talent</h2>
+        <span>{{ results|length }} candidates</span>
+      </div>
+
+      {% if error %}
+        <div class="alert">{{ error }}</div>
+      {% endif %}
+
+      {% if results %}
+        <ol class="ranking">
+          {% for item in results %}
+            <li class="candidate">
+              <div class="candidate-main">
+                <span class="rank">#{{ item.rank }}</span>
+                <div>
+                  <h3>{{ item.name }}</h3>
+                  <p>{{ item.text_preview }}</p>
+                </div>
+              </div>
+              <div class="score">
+                <strong>{{ item.percent }}%</strong>
+                <span>Text similarity </span>
+              </div>
+              <div class="terms">
+                {% for term in item.matched_terms %}
+                  <span>{{ term }}</span>
+                {% endfor %}
+              </div>
+            </li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <div class="empty">
+          Upload resumes and run a match to see the top candidates first.
+        </div>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>
